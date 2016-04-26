@@ -19,11 +19,55 @@
 			value="Incrementar" />
 	</h:form>
 	<h:form>
-		<p:fieldset legend="Basic" style="margin-top:20px" border="1">
-			<h:panelGrid cellpadding="5">
-				<h:outputText value="teste" />
+		<p:fieldset legend="Formulário de Cadastro" style="margin-top:20px"
+			border="1">
+			<h:panelGrid cellpadding="5" columns="4">
+				<p:column>
+					<p:outputLabel value="Nome:" />
+					<p:inputText />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask id="cpf" value="#{maskView.ssn}" mask="999.999.999-99" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="date" value="Data de nascimento: " />
+					<p:inputMask id="date" value="" mask="99/99/9999" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="telefone" value="Telefone: " />
+					<p:inputMask id="telefone" value="#{maskView.phoneExt}"
+						mask="(99) 9999-9999" />
+				</p:column>
+
+				<p:column>
+					<p:commandButton value="Cadastrar" />
+				</p:column>
 			</h:panelGrid>
 		</p:fieldset>
 	</h:form>
+
+	<p:dataTable var="car" value="#{dtPaginatorView.cars}" rows="10"
+		paginator="true" emptyMessage="Nenhum registro encontrado!"
+		paginatorPosition="top" rowsPerPageTemplate="5,10,15">
+		<p:column headerText="Nome">
+			<h:outputText value="#{car.id}" />
+		</p:column>
+
+		<p:column headerText="Cpf">
+			<h:outputText value="#{car.year}" />
+		</p:column>
+
+		<p:column headerText="Data de nascimento">
+			<h:outputText value="#{car.brand}" />
+		</p:column>
+
+		<p:column headerText="Telefone">
+			<h:outputText value="#{car.color}" />
+		</p:column>
+	</p:dataTable>
 </h:body>
 </html>
