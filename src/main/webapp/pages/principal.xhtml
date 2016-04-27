@@ -12,48 +12,52 @@
 	<title>JSF - Presentation</title>
 </h:head>
 <h:body>
-	
+
 	<h:form prependId="false">
 		<p:fieldset legend="Formulário de Cadastro" style="margin-top:20px"
 			border="1">
+			<p:messages id="messages" showDetail="false" />
 			<h:panelGrid cellpadding="5" columns="4" id="dados">
-				
-					<p:column>
-						<p:outputLabel value="Nome:" />
-						<p:inputText id="nome"
-							value="#{funcionarioController.funcionario.nome}" />
-					</p:column>
-
-					<p:column>
-						<p:outputLabel for="cpf" value="CPF:" />
-						<p:inputMask id="cpf"
-							value="#{funcionarioController.funcionario.cpf}"
-							mask="999.999.999-99" />
-					</p:column>
-
-					<p:column>
-						<p:outputLabel for="date" value="Data de nascimento: " />
-						<p:inputMask id="date"
-							value="#{funcionarioController.funcionario.dataNascimento}"
-							mask="99/99/9999" />
-					</p:column>
-
-					<p:column>
-						<p:outputLabel for="telefone" value="Telefone: " />
-						<p:inputMask id="telefone"
-							value="#{funcionarioController.funcionario.telefone}"
-							mask="(99) 9999-9999" />
-					</p:column>
 				<p:column>
-					<p:commandButton value="Cadastrar" process="@this dados" action="#{funcionarioController.addF()}" update="dados tabelaFuncionarios" />
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nome" required="true"
+						value="#{funcionarioController.funcionario.nome}" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="cpf" value="CPF:" />
+					<p:inputMask id="cpf" required="true"
+						value="#{funcionarioController.funcionario.cpf}"
+						mask="999.999.999-99" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="date" value="Data de nascimento: " />
+					<p:inputMask id="date"
+						value="#{funcionarioController.funcionario.dataNascimento}"
+						mask="99/99/9999" />
+				</p:column>
+
+				<p:column>
+					<p:outputLabel for="telefone" value="Telefone: " />
+					<p:inputMask id="telefone"
+						value="#{funcionarioController.funcionario.telefone}"
+						mask="(99) 9999-9999" />
+				</p:column>
+				<p:column>
+					<p:commandButton value="Cadastrar" process="@this dados"
+						action="#{funcionarioController.addFuncionario()}"
+						update="dados tabelaFuncionarios messages" />
 				</p:column>
 			</h:panelGrid>
 		</p:fieldset>
 	</h:form>
 
-	<p:dataTable var="funcionario" value="#{funcionarioController.pegarLista()}" rows="10" id="tabelaFuncionarios"
-		paginator="true" emptyMessage="Nenhum registro encontrado!"
-		paginatorPosition="top" rowsPerPageTemplate="5,10,15">
+	<p:dataTable var="funcionario"
+		value="#{funcionarioController.funcionarios}" rows="10"
+		id="tabelaFuncionarios" paginator="true"
+		emptyMessage="Nenhum registro encontrado!" paginatorPosition="top"
+		rowsPerPageTemplate="5,10,15">
 		<p:column headerText="Nome">
 			<h:outputText value="#{funcionario.nome}" />
 		</p:column>
