@@ -12,61 +12,62 @@
 	<title>JSF - Presentation</title>
 </h:head>
 <h:body>
-	<h:form prependId="false" id="formulario">
-		<h:inputText id="textoInput" value="#{principalController.numero}" />
-
-		<h:commandButton action="#{principalController.incrementar()}"
-			value="Incrementar" />
-	</h:form>
-	<h:form>
+	
+	<h:form prependId="false">
 		<p:fieldset legend="Formulário de Cadastro" style="margin-top:20px"
 			border="1">
-			<h:panelGrid cellpadding="5" columns="4">
-				<p:column>
-					<p:outputLabel value="Nome:" />
-					<p:inputText />
-				</p:column>
+			<h:panelGrid cellpadding="5" columns="4" id="dados">
+				
+					<p:column>
+						<p:outputLabel value="Nome:" />
+						<p:inputText id="nome"
+							value="#{funcionarioController.funcionario.nome}" />
+					</p:column>
 
-				<p:column>
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" value="#{maskView.ssn}" mask="999.999.999-99" />
-				</p:column>
+					<p:column>
+						<p:outputLabel for="cpf" value="CPF:" />
+						<p:inputMask id="cpf"
+							value="#{funcionarioController.funcionario.cpf}"
+							mask="999.999.999-99" />
+					</p:column>
 
-				<p:column>
-					<p:outputLabel for="date" value="Data de nascimento: " />
-					<p:inputMask id="date" value="" mask="99/99/9999" />
-				</p:column>
+					<p:column>
+						<p:outputLabel for="date" value="Data de nascimento: " />
+						<p:inputMask id="date"
+							value="#{funcionarioController.funcionario.dataNascimento}"
+							mask="99/99/9999" />
+					</p:column>
 
+					<p:column>
+						<p:outputLabel for="telefone" value="Telefone: " />
+						<p:inputMask id="telefone"
+							value="#{funcionarioController.funcionario.telefone}"
+							mask="(99) 9999-9999" />
+					</p:column>
 				<p:column>
-					<p:outputLabel for="telefone" value="Telefone: " />
-					<p:inputMask id="telefone" value="#{maskView.phoneExt}"
-						mask="(99) 9999-9999" />
-				</p:column>
-
-				<p:column>
-					<p:commandButton value="Cadastrar" />
+					<p:commandButton value="Cadastrar" process="@this dados" action="#{funcionarioController.addF()}" update="dados tabelaFuncionarios" />
 				</p:column>
 			</h:panelGrid>
 		</p:fieldset>
 	</h:form>
 
-	<p:dataTable var="car" value="#{dtPaginatorView.cars}" rows="10"
+	<p:dataTable var="funcionario" value="#{funcionarioController.pegarLista()}" rows="10" id="tabelaFuncionarios"
 		paginator="true" emptyMessage="Nenhum registro encontrado!"
 		paginatorPosition="top" rowsPerPageTemplate="5,10,15">
 		<p:column headerText="Nome">
-			<h:outputText value="#{car.id}" />
+			<h:outputText value="#{funcionario.nome}" />
 		</p:column>
 
 		<p:column headerText="Cpf">
-			<h:outputText value="#{car.year}" />
+			<h:outputText value="#{funcionario.cpf}" />
 		</p:column>
 
 		<p:column headerText="Data de nascimento">
-			<h:outputText value="#{car.brand}" />
+			<h:outputText value="#{funcionario.dataNascimento}" />
 		</p:column>
 
 		<p:column headerText="Telefone">
-			<h:outputText value="#{car.color}" />
+			<h:outputText value="#{funcionario.telefone}" />
 		</p:column>
 	</p:dataTable>
 </h:body>
