@@ -24,9 +24,10 @@ public class FuncionarioController {
 		this.funcionario = funcionario;
 	}
 
-	public void addFuncionario() {
+	public void addFuncionario() {	
 		funcionarios.add(funcionario);
-		funcionario = new Funcionario();
+		funcionario = new Funcionario();			
+		
 	}
 
 	public List<Funcionario> pegarLista() {
