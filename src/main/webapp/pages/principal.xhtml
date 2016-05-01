@@ -1,78 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
+	<ui:define name="corpoLayout">
+			<h:form prependId="false">
+				<p:fieldset legend="Formulário de Cadastro" style="margin-top:20px"
+					border="1">
+					<p:messages id="messages" showDetail="false" />
+					<h:panelGrid cellpadding="5" columns="4" id="dados">
+						<p:column>
+							<p:outputLabel value="Nome:" />
+							<p:inputText id="nome" required="true"
+								value="#{funcionarioController.funcionario.nome}" />
+						</p:column>
 
-	<title>JSF - Presentation</title>
-</h:head>
-<h:body>
-
-	<h:form prependId="false">
-		<p:fieldset legend="Formulário de Cadastro" style="margin-top:20px"
-			border="1">
-			<p:messages id="messages" showDetail="false" />
-			<h:panelGrid cellpadding="5" columns="4" id="dados">
-				<p:column>
-					<p:outputLabel value="Nome:" />
-					<p:inputText id="nome" required="true"
-						value="#{funcionarioController.funcionario.nome}" />
+						<p:column>
+							<p:outputLabel for="cpf" value="CPF:" />
+							<p:inputMask id="cpf" required="true"
+								value="#{funcionarioController.funcionario.cpf}"
+								mask="999.999.999-99" />
+						</p:column>
+						<p:column>
+							<p:outputLabel for="date" value="Data de nascimento: " />
+							<p:inputMask id="date"
+								value="#{funcionarioController.funcionario.dataNascimento}"
+								mask="99/99/9999" />
+						</p:column>
+						<p:column>
+							<p:outputLabel for="telefone" value="Telefone: " />
+							<p:inputMask id="telefone"
+								value="#{funcionarioController.funcionario.telefone}"
+								mask="(99) 9999-9999" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Cadastrar" process="@this dados"
+								actionListener="#{funcionarioController.addFuncionario()}"
+								update="dados tabelaFuncionarios messages" />
+						</p:column>
+					</h:panelGrid>
+				</p:fieldset>
+			</h:form>
+			<p:dataTable var="funcionario"
+				value="#{funcionarioController.funcionarios}" rows="10"
+				id="tabelaFuncionarios" paginator="true"
+				emptyMessage="Nenhum registro encontrado!" paginatorPosition="top"
+				rowsPerPageTemplate="5,10,15">
+				<p:column headerText="Nome">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+				
+				<p:column headerText="Cpf">
+					<h:outputText value="#{funcionario.cpf}" />
+				</p:column>
+				
+				<p:column headerText="Data de nascimento">
+					<h:outputText value="#{funcionario.dataNascimento}" />
 				</p:column>
 
-				<p:column>
-					<p:outputLabel for="cpf" value="CPF:" />
-					<p:inputMask id="cpf" required="true"
-						value="#{funcionarioController.funcionario.cpf}"
-						mask="999.999.999-99" />
+				<p:column headerText="Telefone">
+					<h:outputText value="#{funcionario.telefone}" />
 				</p:column>
-
-				<p:column>
-					<p:outputLabel for="date" value="Data de nascimento: " />
-					<p:inputMask id="date"
-						value="#{funcionarioController.funcionario.dataNascimento}"
-						mask="99/99/9999" />
-				</p:column>
-
-				<p:column>
-					<p:outputLabel for="telefone" value="Telefone: " />
-					<p:inputMask id="telefone"
-						value="#{funcionarioController.funcionario.telefone}"
-						mask="(99) 9999-9999" />
-				</p:column>
-				<p:column>
-					<p:commandButton value="Cadastrar" process="@this dados"
-						action="#{funcionarioController.addFuncionario()}"
-						update="dados tabelaFuncionarios messages" />
-				</p:column>
-			</h:panelGrid>
-		</p:fieldset>
-	</h:form>
-
-	<p:dataTable var="funcionario"
-		value="#{funcionarioController.funcionarios}" rows="10"
-		id="tabelaFuncionarios" paginator="true"
-		emptyMessage="Nenhum registro encontrado!" paginatorPosition="top"
-		rowsPerPageTemplate="5,10,15">
-		<p:column headerText="Nome">
-			<h:outputText value="#{funcionario.nome}" />
-		</p:column>
-
-		<p:column headerText="Cpf">
-			<h:outputText value="#{funcionario.cpf}" />
-		</p:column>
-
-		<p:column headerText="Data de nascimento">
-			<h:outputText value="#{funcionario.dataNascimento}" />
-		</p:column>
-
-		<p:column headerText="Telefone">
-			<h:outputText value="#{funcionario.telefone}" />
-		</p:column>
-	</p:dataTable>
-</h:body>
-</html>
+			</p:dataTable>		
+	</ui:define>
+</ui:composition>

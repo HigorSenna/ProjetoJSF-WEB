@@ -3,10 +3,8 @@ package br.com.stefanini.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 
 import br.com.stefanini.model.Funcionario;
 
@@ -26,8 +24,7 @@ public class FuncionarioController {
 
 	public void addFuncionario() {	
 		funcionarios.add(funcionario);
-		funcionario = new Funcionario();			
-		
+		funcionario = new Funcionario();					
 	}
 
 	public List<Funcionario> pegarLista() {
